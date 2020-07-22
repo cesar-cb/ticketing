@@ -1,19 +1,19 @@
 import { Request, Response, NextFunction } from 'express';
-import RequestValidationError from '../errors/RequestValidationError'
+import { CustomError } from '../errors/CustomError'
 
-export default () => (
+export const errorHandler = (
   err: Error,
   req: Request,
   res: Response,
-  next: NextFunction,
+  next: NextFunction
 ) => {
-  if (err instanceof RequestValidationError) {
-    const formattedErrors = err.errors.map(error => {
-      return { message: error.msg, field: error.param };
-    });
+  // if (err instanceof CustomError) {
+  //   return res.status(err.statusCode).send({ errors: err.serializeErrors(), status: err.statusCode });
+  // }
 
-    return res.status(400).send({ errors: formattedErrors });
-  }
+  const { message } = err;
 
-  res.status(400).send({ message: err.message })
-}
+  res.status(400).send({
+    errors: [{ message }],
+  });
+};
