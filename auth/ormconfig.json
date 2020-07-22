@@ -1,0 +1,25 @@
+{
+  "type": "postgres",
+  "host": "auth-postgres-srv",
+  "port": 5432,
+  "username": "postgresadmin",
+  "password": "admin123",
+  "database": "auth",
+  "synchronize": true,
+  "logging": false,
+  "entities": [
+     "src/models/**/*.ts"
+  ],
+  "migrations": [
+     "src/migration/**/*.ts"
+  ],
+  "subscribers": [
+     "src/subscriber/**/*.ts"
+  ],
+  "cli":{
+   "migrationsDir": [
+     "src/migrations/"
+   ],
+   "entitiesDir": "src/models/"
+   }
+}
