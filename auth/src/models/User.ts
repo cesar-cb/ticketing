@@ -1,10 +1,13 @@
-import { createSchema, Type, typedModel } from 'ts-mongoose';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-const UserSchema = createSchema({
-  email: Type.string({ required: true }),
-  password: Type.string({ required: true }),
-});
+@Entity()
+export default class User {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-const User = typedModel('User', UserSchema);
+  @Column()
+  email: string;
 
-export { User };
+  @Column()
+  password: string;
+}
