@@ -3,6 +3,7 @@ import { getRepository } from 'typeorm';
 import { body, validationResult } from 'express-validator';
 import RequestValidationError from '../errors/RequestValidationError';
 import User from '../models/User';
+import BadRequestError from '../errors/BadRequestError';
 
 const router = express.Router();
 
@@ -29,13 +30,18 @@ router.post(
     const existingUser = await repo.find({ where: { email } });
 
     if (existingUser.length) {
-      return res.send({ message: 'email in use' });
+      throw new BadRequestError('Email in use');
     }
 
     try {
-      const user = await repo.save({ email, password });
+      const user = new User();
 
-      return res.status(201).send(user);
+      user.email = email;
+      user.password = password;
+
+      const response = await repo.save(user);
+
+      return res.status(201).send(response);
     } catch (error) {
       return res.status(500).send({ error });
     }
