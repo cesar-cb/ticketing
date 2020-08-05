@@ -1,9 +1,10 @@
 import express, { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
-import { body, validationResult } from 'express-validator';
-import RequestValidationError from '../errors/RequestValidationError';
+import jwt from 'jsonwebtoken';
+import { body } from 'express-validator';
 import User from '../models/User';
 import BadRequestError from '../errors/BadRequestError';
+import { validateRequest } from '../middlewares/validateRequest';
 
 const router = express.Router();
 
@@ -18,10 +19,9 @@ const validator = [
 router.post(
   '/api/users/signup',
   validator,
+  validateRequest,
   async (req: Request, res: Response) => {
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) throw new RequestValidationError(errors.array());
+    if (!process.env.JWT_KEY) throw new Error('Missing JWT_KEY value');
 
     const { email, password } = req.body;
 
@@ -40,6 +40,18 @@ router.post(
       user.password = password;
 
       const response = await repo.save(user);
+
+      const userJwt = jwt.sign(
+        {
+          id: response.id,
+          email: response.email,
+        },
+        process.env.JWT_KEY,
+      );
+
+      req.session = {
+        jwt: userJwt,
+      };
 
       return res.status(201).send(response);
     } catch (error) {
