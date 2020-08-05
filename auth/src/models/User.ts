@@ -9,6 +9,11 @@ import bcrypt from 'bcrypt';
 
 @Entity()
 export default class User {
+  toJSON(): this {
+    delete this.password;
+    return this;
+  }
+
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
