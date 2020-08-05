@@ -1,5 +1,8 @@
 import express from 'express';
 import { json } from 'body-parser';
+
+import cookieSession from 'cookie-session';
+
 import 'reflect-metadata';
 import './database';
 
@@ -16,6 +19,13 @@ import NotFoundError from './errors/NotFoundError';
 
 const app = express();
 app.use(json());
+app.set('trust proxy', true);
+app.use(
+  cookieSession({
+    secure: true,
+    signed: false,
+  }),
+);
 
 app.use(signinRoute);
 app.use(signupRoute);
@@ -23,7 +33,7 @@ app.use(signoutRoute);
 app.use(currentUserRouter);
 
 app.all('*', () => {
-  throw new NotFoundError();
+  throw new NotFoundError('route not found');
 });
 
 app.use(errorHandler);
