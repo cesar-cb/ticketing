@@ -1,41 +1,10 @@
-import express from 'express';
-import { json } from 'body-parser';
+import app from './app';
+import dbConnection from './database';
 
-import cookieSession from 'cookie-session';
+const start = async () => {
+  await dbConnection.create();
+};
 
-import 'reflect-metadata';
-import './database';
-
-import 'express-async-errors';
-
-import {
-  signinRoute,
-  signupRoute,
-  signoutRoute,
-  currentUserRouter,
-} from './routes';
-import { errorHandler } from './middlewares/errorHandler';
-import NotFoundError from './errors/NotFoundError';
-
-const app = express();
-app.use(json());
-app.set('trust proxy', true);
-app.use(
-  cookieSession({
-    secure: true,
-    signed: false,
-  }),
-);
-
-app.use(signinRoute);
-app.use(signupRoute);
-app.use(signoutRoute);
-app.use(currentUserRouter);
-
-app.all('*', () => {
-  throw new NotFoundError('route not found');
-});
-
-app.use(errorHandler);
+start();
 
 app.listen(3000, () => console.log('Listening on 3000 🚀'));
