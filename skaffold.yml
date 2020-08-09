@@ -8,11 +8,19 @@ build:
   local:
     push: false
   artifacts:
-    - image: cb_ticketing/auth
+    - image: cesarcb/ticketing-auth
       context: auth
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
           - src: 'src/**/*.ts'
+            dest: .
+    - image: cesarcb/ticketing-client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '**/*.[js,jsx]'
             dest: .
