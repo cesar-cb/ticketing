@@ -9,11 +9,11 @@ import { validateRequest } from '../middlewares/validateRequest';
 const router = express.Router();
 
 const validator = [
-  body('email').isEmail().withMessage('must be an email'),
+  body('email').isEmail().withMessage('Must be an email'),
   body('password')
     .trim()
     .isLength({ min: 4, max: 20 })
-    .withMessage('password must be between 4 and 20 chars'),
+    .withMessage('Password must be between 4 and 20 chars'),
 ];
 
 router.post(
