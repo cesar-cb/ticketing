@@ -1,32 +1,34 @@
 import { useState } from 'react';
 
 import {
-  FormControl,
-  FormLabel,
-  FormHelperText,
-  Input,
-  Button,
-  Flex,
-  Box,
   Alert,
   AlertIcon,
-  Stack,
+  Box,
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
   Heading,
+  Input,
+  Link,
+  Stack,
+  Text,
 } from '@chakra-ui/core';
 
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import NextLink from 'next/link';
 
 import useRequest from '../hooks/useRequest';
 
-const Signup = () => {
+const Signin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
 
   const { request, data, errors } = useRequest({
     method: 'post',
-    url: '/api/users/signup',
+    url: '/api/users/signin',
     body: { email, password },
     onSuccess: () => router.push('/'),
   });
@@ -34,17 +36,17 @@ const Signup = () => {
   return (
     <Flex justifyContent="center" alignItems="center">
       <Head>
-        <title>Ticketing — Signup</title>
+        <title>Ticketing — Signin</title>
       </Head>
 
       <Box
         w={['100%', '70%']}
-        padding={['0 2em', '50px']}
-        marginTop={['80px', '100px']}
+        padding={['2em', '50px']}
+        marginTop={['30px', '100px']}
         bg="gray.900"
         rounded="lg"
       >
-        <Heading>Signup</Heading>
+        <Heading>Signin</Heading>
 
         <Box m="18px 0 32px">
           <Stack spacing={3}>
@@ -56,7 +58,6 @@ const Signup = () => {
             ))}
           </Stack>
         </Box>
-
         <FormControl>
           <form onSubmit={request}>
             <FormLabel htmlFor="email">Email address</FormLabel>
@@ -69,10 +70,6 @@ const Signup = () => {
               autoFocus
               focusBorderColor="teal.100"
             />
-
-            <FormHelperText id="email-helper-text">
-              We'll never share your email.
-            </FormHelperText>
 
             <FormLabel htmlFor="password" marginTop="20px">
               Password
@@ -95,6 +92,13 @@ const Signup = () => {
             >
               Submit
             </Button>
+
+            <Text mt="15px" textAlign="center">
+              No account ?{' '}
+              <NextLink href="/signup">
+                <Link color="teal.100">Create one</Link>
+              </NextLink>
+            </Text>
           </form>
         </FormControl>
       </Box>
@@ -102,4 +106,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Signin;
