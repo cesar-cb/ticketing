@@ -7,14 +7,14 @@ import cookieSession from 'cookie-session';
 import 'reflect-metadata';
 import 'express-async-errors';
 
+import { errorHandler, NotFoundError } from '@ticketingcb/common';
+
 import {
   signinRoute,
   signupRoute,
   signoutRoute,
   currentUserRouter,
 } from './routes';
-import { errorHandler } from './middlewares/errorHandler';
-import NotFoundError from './errors/NotFoundError';
 
 const app = express();
 

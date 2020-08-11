@@ -3,9 +3,9 @@ import { body } from 'express-validator';
 import { getRepository } from 'typeorm';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { validateRequest } from '../middlewares/validateRequest';
+import { validateRequest, NotFoundError } from '@ticketingcb/common';
+
 import User from '../models/User';
-import NotFoundError from '../errors/NotFoundError';
 
 const router = express.Router();
 

@@ -5,6 +5,7 @@ import {
   BeforeInsert,
   BeforeUpdate,
 } from 'typeorm';
+
 import bcrypt from 'bcrypt';
 
 @Entity()

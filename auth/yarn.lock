@@ -482,10 +482,10 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@ticketingcb/common@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@ticketingcb/common/-/common-1.0.2.tgz#89842e75f9d64ebd36e17c7f88cb6c1fcd062875"
-  integrity sha512-Awe4DXWHyB6zXQZeloKDl6EyB0jiJjIwaYPUnVW4N0iwMOhDevd6bWyNZcq35KWbWkCSThZoy40nTmM8G/Wbgg==
+"@ticketingcb/common@^1.0.9":
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/@ticketingcb/common/-/common-1.0.9.tgz#7204ff1327160e3014ce0f7416e7b198b47eacc3"
+  integrity sha512-0/es1XXehl30lYXq06XCBjBCRfE0Q79lgOHO/QM2pfPr8/srVwzhLj/MtDn6x4kZ2kUeUr+NKpuoWwsiDOuwyA==
   dependencies:
     "@types/cookie-session" "^2.0.41"
     "@types/express" "^4.17.7"
