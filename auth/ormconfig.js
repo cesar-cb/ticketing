@@ -1,10 +1,10 @@
 module.exports = {
   type: 'postgres',
-  host: 'auth-postgres-test-srv',
+  host: 'auth-postgres-srv',
   port: 5432,
   username: 'postgresadmin',
   password: 'admin123',
-  database: 'auth-test',
+  database: 'auth',
   synchronize: true,
   dropSchema: true,
   logging: false,
