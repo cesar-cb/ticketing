@@ -5,7 +5,7 @@ import request from '../api/request';
 const config = theme => ({
   light: {
     color: theme.colors.gray[700],
-    bg: theme.colors.red[90],
+    bg: theme.colors.gray[50],
     borderColor: theme.colors.gray[200],
     placeholderColor: theme.colors.gray[500],
   },
@@ -16,8 +16,6 @@ const config = theme => ({
     placeholderColor: theme.colors.whiteAlpha[400],
   },
 });
-
-console.log(theme);
 
 const App = ({ Component, pageProps, currentUser }) => {
   return (
@@ -45,8 +43,6 @@ App.getInitialProps = async appContext => {
   if (componentGetInitialProps) {
     pageProps = await componentGetInitialProps(appContext.ctx);
   }
-
-  console.log({ pageProps, data });
 
   return {
     pageProps,

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default ({ req }) => {
+const request = ({ req }) => {
   if (typeof window === 'undefined') {
     return axios.create({
       baseURL: 'http://ingress-nginx-controller.kube-system.svc.cluster.local',
@@ -12,3 +12,5 @@ export default ({ req }) => {
     });
   }
 };
+
+export default request;

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-export default ({
+const useRequest = ({
   method = 'get',
   body = {},
   url = '',
@@ -29,3 +29,5 @@ export default ({
 
   return { errors, data, request };
 };
+
+export default useRequest;
