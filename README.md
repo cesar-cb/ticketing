@@ -6,3 +6,4 @@
 - [ ] Revisit Error Handler
 - [ ] Monorepo
 - [ ] Layout
+- [ ] Template (g8?)
