@@ -7,3 +7,5 @@
 - [ ] Monorepo
 - [ ] Layout
 - [ ] Template (g8?)
+- [ ] add errors message to a constant
+- [ ] create d.ts files

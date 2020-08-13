@@ -7,7 +7,14 @@ import cookieSession from 'cookie-session';
 import 'reflect-metadata';
 import 'express-async-errors';
 
-import { errorHandler, NotFoundError } from '@ticketingcb/common';
+import { errorHandler, NotFoundError, currentUser } from '@ticketingcb/common';
+
+import {
+  newTicketRoute,
+  showTicketRoute,
+  allTicketsRoute,
+  updateTicketRoute,
+} from './routes';
 
 const app = express();
 
@@ -20,6 +27,13 @@ app.use(
     signed: false,
   }),
 );
+
+app.use(currentUser);
+
+app.use(newTicketRoute);
+app.use(showTicketRoute);
+app.use(allTicketsRoute);
+app.use(updateTicketRoute);
 
 app.all('*', () => {
   throw new NotFoundError('route not found');

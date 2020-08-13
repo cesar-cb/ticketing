@@ -1,29 +1,45 @@
-import request from 'supertest';
-
-import app from '../app';
+import jwt from 'jsonwebtoken';
 import connection from '../database';
+
+interface ISigninPayload {
+  session: string[];
+  payload: {
+    id: string;
+    email: string;
+  };
+}
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace NodeJS {
     export interface Global {
-      signup(): Promise<string[]>;
+      signin(): ISigninPayload;
     }
   }
 }
 
-global.signup = async () => {
-  const response = await request(app)
-    .post('/api/users/signup')
-    .send({
-      email: 'test@email.com',
-      password: 'password',
-    })
-    .expect(201);
+global.signin = () => {
+  if (!process.env.JWT_KEY) throw new Error('Missing JWT_KEY value');
+  // Build a JWT payload.  { id, email }
+  const payload = {
+    id: '6c9794bc-b4f3-4734-a62b-982f84d96ca0',
+    email: 'test@test.com',
+  };
 
-  const cookie = response.get('Set-Cookie');
+  // Create the JWT!
+  const token = jwt.sign(payload, process.env.JWT_KEY);
 
-  return cookie;
+  // Build session Object. { jwt: MY_JWT }
+  const session = { jwt: token };
+
+  // Turn that session into JSON
+  const sessionJSON = JSON.stringify(session);
+
+  // Take JSON and encode it as base64
+  const base64 = Buffer.from(sessionJSON).toString('base64');
+
+  // return a string thats the cookie with the encoded data
+  return { session: [`express:sess=${base64}`], payload };
 };
 
 beforeAll(async () => {

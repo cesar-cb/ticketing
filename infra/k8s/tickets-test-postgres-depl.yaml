@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tickets-test-postgres-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tickets-test-postgres
+  template:
+    metadata:
+      labels:
+        app: tickets-test-postgres
+    spec:
+      containers:
+        - name: tickets-test-postgres
+          image: postgres:latest
+          env:
+            - name: POSTGRES_DB
+              value: tickets-test
+            - name: POSTGRES_USER
+              value: postgresadmin
+            - name: POSTGRES_PASSWORD
+              value: admin123
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tickets-test-postgres-srv
+spec:
+  selector:
+    app: tickets-test-postgres
+  ports:
+    - port: 5432
+      targetPort: 5432
+  externalTrafficPolicy: Local
+  type: LoadBalancer
