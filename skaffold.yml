@@ -14,7 +14,7 @@ build:
         dockerfile: Dockerfile
       sync:
         manual:
-          - src: "src/**/*.ts"
+          - src: 'src/**/*.ts'
             dest: .
     - image: cesarcb/ticketing-tickets
       context: tickets
@@ -22,7 +22,15 @@ build:
         dockerfile: Dockerfile
       sync:
         manual:
-          - src: "src/**/*.ts"
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: cesarcb/ticketing-orders
+      context: orders
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
             dest: .
     - image: cesarcb/ticketing-client
       context: client
@@ -30,5 +38,5 @@ build:
         dockerfile: Dockerfile
       sync:
         manual:
-          - src: "**/*.{js,jsx}"
+          - src: '**/*.{js,jsx}'
             dest: .
