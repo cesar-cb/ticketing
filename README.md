@@ -14,3 +14,4 @@
 - [ ] wishlist
 - [ ] rabbitMQ or kafka
 - [ ] move db connection to common
+- [ ] versionamento de API ?
