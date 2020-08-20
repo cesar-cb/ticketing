@@ -18,7 +18,7 @@
     ]
   },
   "dependencies": {
-    "@ticketingcb/common": "^1.0.10",
+    "@ticketingcb/common": "^1.0.13",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "cookie-session": "^1.4.0",
@@ -28,6 +28,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.24",
     "morgan": "^1.10.0",
+    "node-nats-streaming": "^0.3.2",
     "pg": "^8.3.0",
     "reflect-metadata": "^0.1.13",
     "supertest": "^4.0.2",
