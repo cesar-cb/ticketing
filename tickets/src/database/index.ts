@@ -6,6 +6,8 @@ const connection = {
 
     const options = await getConnectionOptions(optionName);
 
+    console.log('Connected to DB');
+
     return createConnection({ ...options, name: 'default' });
   },
 

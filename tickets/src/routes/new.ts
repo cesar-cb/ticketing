@@ -4,6 +4,8 @@ import { body } from 'express-validator';
 import { getRepository } from 'typeorm';
 
 import Ticket from '../models/Ticket';
+import TicketCreatedPublisher from '../events/publishers/TicketCreatedPublisher';
+import natsWrapper from '../nats-wrapper';
 
 const router = express.Router();
 
@@ -26,6 +28,14 @@ router.post(
       title,
       price,
       userId: req.currentUser?.id,
+    });
+
+    await new TicketCreatedPublisher(natsWrapper.client).publish({
+      id: ticket.id,
+      title: ticket.title,
+      price: ticket.price,
+      userId: ticket.userId,
+      version: 1,
     });
 
     return res.status(201).json(ticket);

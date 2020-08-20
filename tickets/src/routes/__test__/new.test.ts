@@ -3,6 +3,7 @@ import { getRepository } from 'typeorm';
 
 import app from '../../app';
 import Ticket from '../../models/Ticket';
+import natsWrapper from '../../nats-wrapper';
 
 describe('Routes/new', () => {
   it('should reach /api/tickets for post requests', async () => {
@@ -87,5 +88,20 @@ describe('Routes/new', () => {
 
     expect(ticket.title).toEqual(createdTicket.body.title);
     expect(ticket.price).toEqual(createdTicket.body.price);
+  });
+
+  it('publishes an event', async () => {
+    const title = 'asldkfj';
+
+    await request(app)
+      .post('/api/tickets')
+      .set('Cookie', global.signin().session)
+      .send({
+        title,
+        price: 20,
+      })
+      .expect(201);
+
+    expect(natsWrapper.client.publish).toHaveBeenCalled();
   });
 });

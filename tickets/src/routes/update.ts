@@ -12,6 +12,8 @@ import {
 } from '@ticketingcb/common';
 
 import Ticket from '../models/Ticket';
+import TicketUpdatedPublisher from '../events/publishers/TicketUpdatedPublisher';
+import natsWrapper from '../nats-wrapper';
 
 const router = express.Router();
 
@@ -41,6 +43,14 @@ router.put(
     if (ticket.userId !== req.currentUser?.id) throw new UnauthorizedError();
 
     const updatedTicket = await repo.save({ ...ticket, title, price });
+
+    new TicketUpdatedPublisher(natsWrapper.client).publish({
+      id: ticket.id,
+      title: ticket.title,
+      price: ticket.price,
+      userId: ticket.userId,
+      version: 1,
+    });
 
     return res.status(201).json(updatedTicket);
   },

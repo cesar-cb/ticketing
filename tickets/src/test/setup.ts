@@ -18,6 +18,8 @@ declare global {
   }
 }
 
+jest.mock('../nats-wrapper');
+
 global.signin = () => {
   if (!process.env.JWT_KEY) throw new Error('Missing JWT_KEY value');
   // Build a JWT payload.  { id, email }

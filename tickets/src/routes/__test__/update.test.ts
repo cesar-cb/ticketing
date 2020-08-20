@@ -5,6 +5,7 @@ import { getRepository } from 'typeorm';
 
 import app from '../../app';
 import Ticket from '../../models/Ticket';
+import natsWrapper from '../../nats-wrapper';
 
 describe('Routes/update', () => {
   it('should return 404 if provided id does not exist', async () => {
@@ -18,6 +19,29 @@ describe('Routes/update', () => {
         price: 20,
       })
       .expect(404);
+  });
+
+  it('publishes an event', async () => {
+    const cookie = global.signin().session;
+
+    const response = await request(app)
+      .post('/api/tickets')
+      .set('Cookie', cookie)
+      .send({
+        title: 'asldkfj',
+        price: 20,
+      });
+
+    await request(app)
+      .put(`/api/tickets/${response.body.id}`)
+      .set('Cookie', cookie)
+      .send({
+        title: 'new title',
+        price: 100,
+      })
+      .expect(200);
+
+    expect(natsWrapper.client.publish).toHaveBeenCalledTimes(2);
   });
 
   it('should return 401 if user is not authenticated', async () => {
