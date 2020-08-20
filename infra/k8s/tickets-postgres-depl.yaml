@@ -15,9 +15,13 @@ spec:
       containers:
         - name: tickets-postgres
           image: postgres:latest
-          envFrom:
-            - configMapRef:
-                name: tickets-postgres-config
+          env:
+            - name: POSTGRES_DB
+              value: tickets
+            - name: POSTGRES_USER
+              value: postgresadmin
+            - name: POSTGRES_PASSWORD
+              value: admin123
 ---
 apiVersion: v1
 kind: Service
