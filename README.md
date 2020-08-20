@@ -13,3 +13,4 @@
 - [ ] translations
 - [ ] wishlist
 - [ ] rabbitMQ or kafka
+- [ ] move db connection to common
