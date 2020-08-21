@@ -2,6 +2,8 @@ import { createConnection, getConnection } from 'typeorm';
 
 const connection = {
   async create() {
+    console.log('Connected to Orders DB');
+
     return createConnection();
   },
 

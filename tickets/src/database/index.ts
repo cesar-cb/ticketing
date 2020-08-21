@@ -6,7 +6,7 @@ const connection = {
 
     const options = await getConnectionOptions(optionName);
 
-    console.log('Connected to DB');
+    console.log('Connected to Tickets DB');
 
     return createConnection({ ...options, name: 'default' });
   },
