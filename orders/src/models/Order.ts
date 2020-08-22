@@ -27,7 +27,7 @@ export default class Order {
   @Column('date')
   expiresAt: Date;
 
-  @OneToOne(type => Ticket)
+  @OneToOne(() => Ticket)
   @JoinColumn()
   ticket: Ticket;
 }

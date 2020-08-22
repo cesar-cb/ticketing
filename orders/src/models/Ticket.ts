@@ -9,5 +9,5 @@ export default class Ticket {
   title: string;
 
   @Column()
-  price: string;
+  price: number;
 }
