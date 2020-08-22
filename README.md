@@ -14,4 +14,5 @@
 - [ ] wishlist
 - [ ] rabbitMQ or kafka
 - [ ] move db connection to common
-- [ ] versionamento de API ?
+- [ ] API version ?
+- [ ] add more code to common (tests, nats-wrapper, app ?, database config)
