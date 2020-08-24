@@ -45,10 +45,10 @@ router.put(
     const updatedTicket = await repo.save({ ...ticket, title, price });
 
     new TicketUpdatedPublisher(natsWrapper.client).publish({
-      id: ticket.id,
-      title: ticket.title,
-      price: ticket.price,
-      userId: ticket.userId,
+      id: updatedTicket.id,
+      title: updatedTicket.title,
+      price: updatedTicket.price,
+      userId: updatedTicket.userId,
       version: 1,
     });
 
