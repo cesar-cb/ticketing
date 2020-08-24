@@ -36,10 +36,10 @@ router.post(
     const ticketRepo = getRepository(Ticket);
     const orderRepo = getCustomRepository(OrderRepository);
 
-    // const createdTicket = await ticketRepo.save({
-    //   title: 'title',
-    //   price: 50,
-    // });
+    const createdTicket = await ticketRepo.save({
+      title: 'title',
+      price: 50,
+    });
 
     // console.log(createdTicket);
 

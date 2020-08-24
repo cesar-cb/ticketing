@@ -1,6 +1,6 @@
 import newOrdersRoute from './new';
 import showOrdersRoute from './show';
 import allOrdersRoute from './all';
-import deleteOrdersRoute from './delete';
+import cancelOrdersRoute from './cancel';
 
-export { newOrdersRoute, showOrdersRoute, allOrdersRoute, deleteOrdersRoute };
+export { newOrdersRoute, showOrdersRoute, allOrdersRoute, cancelOrdersRoute };

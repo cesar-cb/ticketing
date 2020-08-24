@@ -4,13 +4,14 @@ import {
   requireAuth,
   NotFoundError,
   UnauthorizedError,
+  OrderStatus,
 } from '@ticketingcb/common';
 
 import Orders from '../models/Order';
 
 const router = express.Router();
 
-router.get(
+router.patch(
   '/api/orders/:id',
   requireAuth,
   async (req: Request, res: Response) => {
@@ -18,14 +19,18 @@ router.get(
 
     const order = await repo.findOne({
       where: { id: req.params.id },
-      relations: ['ticket'],
     });
 
     if (!order) throw new NotFoundError('Order not found');
 
     if (order.userId !== req.currentUser?.id) throw new UnauthorizedError();
 
-    return res.json(order);
+    const newOrder = await repo.save({
+      ...order,
+      status: OrderStatus.Cancelled,
+    });
+
+    return res.status(200).json(newOrder);
   },
 );
 

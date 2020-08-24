@@ -13,7 +13,7 @@ import {
   newOrdersRoute,
   showOrdersRoute,
   allOrdersRoute,
-  deleteOrdersRoute,
+  cancelOrdersRoute,
 } from './routes';
 
 const app = express();
@@ -33,7 +33,7 @@ app.use(currentUser);
 app.use(newOrdersRoute);
 app.use(showOrdersRoute);
 app.use(allOrdersRoute);
-app.use(deleteOrdersRoute);
+app.use(cancelOrdersRoute);
 
 app.all('*', () => {
   throw new NotFoundError('route not found');
