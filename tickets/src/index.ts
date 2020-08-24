@@ -1,6 +1,8 @@
 import app from './app';
 import dbConnection from './database';
 import natsWrapper from './nats-wrapper';
+import OrderCreatedListener from './events/listeners/OrderCreatedListener';
+import OrderCancelledListener from './events/listeners/OrderCancelledListener';
 
 const start = async () => {
   try {
@@ -21,6 +23,9 @@ const start = async () => {
 
     process.on('SIGINT', () => natsWrapper.client.close());
     process.on('SIGTERM', () => natsWrapper.client.close());
+
+    new OrderCreatedListener(natsWrapper.client).listen();
+    new OrderCancelledListener(natsWrapper.client).listen();
   } catch (error) {
     console.error(error);
   }

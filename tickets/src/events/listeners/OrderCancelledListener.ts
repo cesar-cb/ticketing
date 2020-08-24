@@ -1,0 +1,40 @@
+import { Listener, OrderCancelledEvent, Subjects } from '@ticketingcb/common';
+import { Message } from 'node-nats-streaming';
+import { getRepository } from 'typeorm';
+
+import { QUEUE_GROUP_NAME } from '../queueGroupName';
+import TicketUpdatedPublisher from '../publishers/TicketUpdatedPublisher';
+import Ticket from '../../models/Ticket';
+
+export default class OrderCancelledListener extends Listener<
+  OrderCancelledEvent
+> {
+  subject: Subjects.OrderCancelled = Subjects.OrderCancelled;
+
+  queueGroupName = QUEUE_GROUP_NAME;
+
+  async onMessage(
+    data: OrderCancelledEvent['data'],
+    msg: Message,
+  ): Promise<void> {
+    const ticketRepo = getRepository(Ticket);
+    const ticket = await ticketRepo.findOne(data.ticket.id);
+
+    if (!ticket) {
+      throw new Error('Ticket not found');
+    }
+
+    await ticketRepo.save({ ...ticket, orderId: undefined });
+
+    await new TicketUpdatedPublisher(this.client).publish({
+      id: ticket.id,
+      orderId: ticket.orderId,
+      userId: ticket.userId,
+      price: ticket.price,
+      title: ticket.title,
+      version: ticket.version,
+    });
+
+    msg.ack();
+  }
+}
