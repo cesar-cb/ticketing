@@ -12,6 +12,8 @@ import { validate as uuidValidate } from 'uuid';
 
 import OrderRepository from '../repositories/OrderRepository';
 import Ticket from '../models/Ticket';
+import natsWrapper from '../nats-wrapper';
+import OrderCreatedPublisher from '../events/publishers/OrderCreatedPublisher';
 
 const router = express.Router();
 
@@ -58,6 +60,19 @@ router.post(
       expiresAt: expiration,
       status: OrderStatus.Created,
       ticket,
+    });
+
+    // publish event
+    new OrderCreatedPublisher(natsWrapper.client).publish({
+      id: order.id,
+      status: order.status,
+      userId: order.userId,
+      expiresAt: order.expiresAt.toISOString(),
+      version: 1,
+      ticket: {
+        id: ticket.id,
+        price: ticket.price,
+      },
     });
 
     return res.status(201).json(order);

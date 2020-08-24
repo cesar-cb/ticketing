@@ -1,6 +1,8 @@
 import app from './app';
 import dbConnection from './database';
 import natsWrapper from './nats-wrapper';
+import TicketCreatedEventListener from './events/listeners/TicketCreatedListener';
+import TicketUpdatedEventListener from './events/listeners/TicketUpdatedListener';
 
 const start = async () => {
   try {
@@ -21,6 +23,9 @@ const start = async () => {
 
     process.on('SIGINT', () => natsWrapper.client.close());
     process.on('SIGTERM', () => natsWrapper.client.close());
+
+    new TicketCreatedEventListener(natsWrapper.client).listen();
+    new TicketUpdatedEventListener(natsWrapper.client).listen();
   } catch (error) {
     console.error(error);
   }

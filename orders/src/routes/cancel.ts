@@ -8,6 +8,8 @@ import {
 } from '@ticketingcb/common';
 
 import Orders from '../models/Order';
+import OrderCancelledPublisher from '../events/publishers/OrderCancelledPublisher';
+import natsWrapper from '../nats-wrapper';
 
 const router = express.Router();
 
@@ -19,6 +21,7 @@ router.patch(
 
     const order = await repo.findOne({
       where: { id: req.params.id },
+      relations: ['ticket'],
     });
 
     if (!order) throw new NotFoundError('Order not found');
@@ -28,6 +31,14 @@ router.patch(
     const newOrder = await repo.save({
       ...order,
       status: OrderStatus.Cancelled,
+    });
+
+    new OrderCancelledPublisher(natsWrapper.client).publish({
+      id: order.id,
+      version: 1,
+      ticket: {
+        id: order.ticket.id,
+      },
     });
 
     return res.status(200).json(newOrder);
