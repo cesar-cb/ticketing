@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, VersionColumn } from 'typeorm';
 
 @Entity()
 export default class Ticket {
@@ -13,4 +13,10 @@ export default class Ticket {
 
   @Column()
   userId: string;
+
+  @Column()
+  orderId: string;
+
+  @VersionColumn()
+  version: number;
 }

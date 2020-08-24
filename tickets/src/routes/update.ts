@@ -42,6 +42,8 @@ router.put(
 
     if (ticket.userId !== req.currentUser?.id) throw new UnauthorizedError();
 
+    if (ticket.orderId) throw new BadRequestError('Ticket is already reserved');
+
     const updatedTicket = await repo.save({ ...ticket, title, price });
 
     new TicketUpdatedPublisher(natsWrapper.client).publish({
@@ -49,7 +51,7 @@ router.put(
       title: updatedTicket.title,
       price: updatedTicket.price,
       userId: updatedTicket.userId,
-      version: 1,
+      version: updatedTicket.version,
     });
 
     return res.status(201).json(updatedTicket);

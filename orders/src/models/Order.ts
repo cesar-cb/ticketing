@@ -4,6 +4,7 @@ import {
   Column,
   OneToOne,
   JoinColumn,
+  VersionColumn,
 } from 'typeorm';
 import { OrderStatus } from '@ticketingcb/common';
 
@@ -26,6 +27,9 @@ export default class Order {
 
   @Column('date')
   expiresAt: Date;
+
+  @VersionColumn()
+  version: number;
 
   @OneToOne(() => Ticket)
   @JoinColumn()

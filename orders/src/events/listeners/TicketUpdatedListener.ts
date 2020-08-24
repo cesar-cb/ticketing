@@ -21,11 +21,13 @@ export default class TicketUpdatedEventListener extends Listener<
     data: TicketUpdatedEvent['data'],
     msg: Message,
   ): Promise<void> {
-    const { title, price, id } = data;
+    const { title, price, id, version } = data;
 
     const ticketRepo = getRepository(Ticket);
 
-    const ticket = await ticketRepo.findOne(id);
+    const ticket = await ticketRepo.findOne({
+      where: { id, version: version - 1 },
+    });
 
     if (!ticket) throw new NotFoundError('Ticket not found');
 

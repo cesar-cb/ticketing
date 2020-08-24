@@ -1,8 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, Column, PrimaryColumn, VersionColumn } from 'typeorm';
 
 @Entity()
 export default class Ticket {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn('uuid')
   id: string;
 
   @Column()
@@ -10,4 +10,7 @@ export default class Ticket {
 
   @Column()
   price: number;
+
+  @VersionColumn()
+  version: number;
 }
