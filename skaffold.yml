@@ -32,6 +32,14 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
+    - image: cesarcb/ticketing-expiration
+      context: expiration
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
     - image: cesarcb/ticketing-client
       context: client
       docker:
