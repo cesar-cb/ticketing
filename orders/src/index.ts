@@ -3,6 +3,7 @@ import dbConnection from './database';
 import natsWrapper from './nats-wrapper';
 import TicketCreatedEventListener from './events/listeners/TicketCreatedListener';
 import TicketUpdatedEventListener from './events/listeners/TicketUpdatedListener';
+import ExpirationCompleteEventListener from './events/listeners/ExpirationCompleteListener';
 
 const start = async () => {
   try {
@@ -26,6 +27,7 @@ const start = async () => {
 
     new TicketCreatedEventListener(natsWrapper.client).listen();
     new TicketUpdatedEventListener(natsWrapper.client).listen();
+    new ExpirationCompleteEventListener(natsWrapper.client).listen();
   } catch (error) {
     console.error(error);
   }
