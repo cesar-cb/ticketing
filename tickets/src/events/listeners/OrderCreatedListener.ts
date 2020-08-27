@@ -31,15 +31,15 @@ export default class OrderCreatedListener extends Listener<OrderCreatedEvent> {
 
     if (!ticket) throw new NotFoundError('Ticket not found');
 
-    await ticketRepo.save({ ...ticket, orderId });
+    const newTicket = await ticketRepo.save({ ...ticket, orderId });
 
     await new TicketUpdatedPublisher(this.client).publish({
-      id: ticket.id,
-      price: ticket.price,
-      title: ticket.title,
-      userId: ticket.userId,
-      orderId: ticket.orderId,
-      version: ticket.version,
+      id: newTicket.id,
+      price: newTicket.price,
+      title: newTicket.title,
+      userId: newTicket.userId,
+      orderId: newTicket.orderId,
+      version: newTicket.version,
     });
 
     msg.ack();
