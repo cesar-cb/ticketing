@@ -8,7 +8,7 @@ export default class Ticket {
   @Column()
   title: string;
 
-  @Column()
+  @Column('bigint')
   price: number;
 
   @VersionColumn()

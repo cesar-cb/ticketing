@@ -8,13 +8,13 @@ export default class Ticket {
   @Column()
   title: string;
 
-  @Column({ type: 'float' })
+  @Column('bigint')
   price: number;
 
   @Column()
   userId: string;
 
-  @Column()
+  @Column({ nullable: true })
   orderId: string;
 
   @VersionColumn()
