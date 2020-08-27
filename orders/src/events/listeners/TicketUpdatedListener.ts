@@ -31,7 +31,7 @@ export default class TicketUpdatedEventListener extends Listener<
 
     if (!ticket) throw new NotFoundError('Ticket not found');
 
-    await ticketRepo.save({ ...ticket, id, price, title });
+    await ticketRepo.save({ ...ticket, price, title });
 
     msg.ack();
   }
