@@ -11,7 +11,10 @@ import { body } from 'express-validator';
 import { getRepository } from 'typeorm';
 
 import Order from '../models/Order';
+import Payment from '../models/Payment';
 import stripe from '../stripe';
+import PaymentCreatedPublisher from '../events/publishers/PaymentCreatedPublisher';
+import natsWrapper from '../nats-wrapper';
 
 const router = express.Router();
 
@@ -29,6 +32,7 @@ router.post(
     const { token, orderId } = req.body;
 
     const orderRepo = getRepository(Order);
+    const paymentRepo = getRepository(Payment);
 
     const order = await orderRepo.findOne(orderId);
 
@@ -42,14 +46,22 @@ router.post(
     if (order.status === OrderStatus.Complete)
       throw new BadRequestError('Order already completed');
 
-    await stripe.charges.create({
+    const charge = await stripe.charges.create({
       currency: 'usd',
       amount: order.price * 100,
       source: token,
       description: 'Ticket payment',
     });
 
-    return res.status(201).json({});
+    const payment = await paymentRepo.save({ orderId, stripeId: charge.id });
+
+    new PaymentCreatedPublisher(natsWrapper.client).publish({
+      id: payment.id,
+      orderId: payment.orderId,
+      stripeId: payment.stripeId,
+    });
+
+    return res.status(201).json({ id: payment.id });
   },
 );
 
