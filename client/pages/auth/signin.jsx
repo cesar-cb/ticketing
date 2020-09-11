@@ -95,7 +95,7 @@ const Signin = () => {
 
             <Text mt="15px" textAlign="center">
               No account ?{' '}
-              <NextLink href="/signup">
+              <NextLink href="/auth/signup" passHref>
                 <Link color="teal.100">Create one</Link>
               </NextLink>
             </Text>

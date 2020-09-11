@@ -1,4 +1,4 @@
-import { Box, Image, Flex, Button, Link, Text, Stack } from '@chakra-ui/core';
+import { Box, Image, Flex, Button, Link, Text } from '@chakra-ui/core';
 import NextLink from 'next/link';
 import Router from 'next/router';
 
@@ -7,11 +7,13 @@ import useRequest from '../../hooks/useRequest';
 
 const Unlogged = () => (
   <>
-    <NextLink href="/signin">
+    <NextLink href="/auth/signin" passHref>
       <Link marginRight="15px">Signin</Link>
     </NextLink>
-    <NextLink href="/signup">
-      <Button variantColor="teal">Signup</Button>
+    <NextLink href="/auth/signup" passHref>
+      <Button variantColor="teal" as="a">
+        Signup
+      </Button>
     </NextLink>
   </>
 );
