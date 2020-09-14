@@ -19,7 +19,7 @@ const useRequest = ({
     try {
       const { data } = await axios[method](url, body);
 
-      onSuccess();
+      onSuccess(data);
 
       setData(data);
     } catch (err) {
