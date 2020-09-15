@@ -1,7 +1,6 @@
 import { Listener, OrderCancelledEvent, Subjects } from '@ticketingcb/common';
 import { Message } from 'node-nats-streaming';
 import { getRepository } from 'typeorm';
-import { omit } from 'lodash';
 
 import { QUEUE_GROUP_NAME } from '../queueGroupName';
 import TicketUpdatedPublisher from '../publishers/TicketUpdatedPublisher';
@@ -29,8 +28,6 @@ export default class OrderCancelledListener extends Listener<
       ...ticket,
       orderId: null,
     });
-
-    console.log({ newTicket });
 
     await new TicketUpdatedPublisher(this.client).publish({
       id: newTicket.id,
