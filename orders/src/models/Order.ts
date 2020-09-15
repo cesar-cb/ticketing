@@ -5,6 +5,7 @@ import {
   OneToOne,
   JoinColumn,
   VersionColumn,
+  ManyToOne,
 } from 'typeorm';
 import { OrderStatus } from '@ticketingcb/common';
 
@@ -31,7 +32,10 @@ export default class Order {
   @VersionColumn()
   version: number;
 
-  @OneToOne(() => Ticket)
-  @JoinColumn()
+  @ManyToOne(type => Ticket)
   ticket: Ticket;
+
+  // @OneToOne(() => Ticket)
+  // @JoinColumn()
+  // ticket: Ticket;
 }

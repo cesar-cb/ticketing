@@ -21,7 +21,7 @@ export default class TicketUpdatedEventListener extends Listener<
     data: TicketUpdatedEvent['data'],
     msg: Message,
   ): Promise<void> {
-    const { title, price, id, version } = data;
+    const { title, price, id, version, orderId } = data;
 
     const ticketRepo = getRepository(Ticket);
 
@@ -31,7 +31,7 @@ export default class TicketUpdatedEventListener extends Listener<
 
     if (!ticket) throw new NotFoundError('Ticket not found');
 
-    await ticketRepo.save({ ...ticket, price, title });
+    await ticketRepo.save({ ...ticket, price, title, orderId });
 
     msg.ack();
   }

@@ -11,6 +11,9 @@ export default class Ticket {
   @Column('bigint')
   price: number;
 
+  @Column({ nullable: true })
+  orderId?: string;
+
   @VersionColumn()
   version: number;
 }

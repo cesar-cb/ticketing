@@ -5,6 +5,7 @@ import {
   NotFoundError,
   UnauthorizedError,
   OrderStatus,
+  BadRequestError,
 } from '@ticketingcb/common';
 
 import Orders from '../models/Order';
@@ -27,6 +28,9 @@ router.patch(
     if (!order) throw new NotFoundError('Order not found');
 
     if (order.userId !== req.currentUser?.id) throw new UnauthorizedError();
+
+    if (order.status === OrderStatus.Cancelled)
+      throw new BadRequestError('Order already cancelled');
 
     const newOrder = await repo.save({
       ...order,
