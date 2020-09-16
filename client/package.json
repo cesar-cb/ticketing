@@ -16,7 +16,8 @@
     "next-images": "^1.4.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-intl-currency-input": "^0.2.5"
+    "react-intl-currency-input": "^0.2.5",
+    "react-stripe-checkout": "^2.6.3"
   },
   "devDependencies": {
     "eslint": "^7.6.0",

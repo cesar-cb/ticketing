@@ -26,8 +26,8 @@ export default class Order {
   })
   status: OrderStatus;
 
-  @Column('date')
-  expiresAt: Date;
+  @Column()
+  expiresAt: string;
 
   @VersionColumn()
   version: number;

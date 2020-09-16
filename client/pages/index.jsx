@@ -44,8 +44,6 @@ const Home = ({ currentUser, tickets }) => {
           </Box>
         </NextLink>
       ))}
-
-      {currentUser ? <Heading>You're logged in</Heading> : null}
     </>
   );
 };

@@ -24,7 +24,7 @@ const App = ({ Component, pageProps, currentUser }) => {
         <DarkMode>
           <CSSReset config={config} />
           <Header currentUser={currentUser} />
-          <Component {...pageProps} />
+          <Component currentUser={currentUser} {...pageProps} />
         </DarkMode>
       </Box>
     </ThemeProvider>

@@ -10,14 +10,14 @@ const useRequest = ({
   const [errors, setErrors] = useState([]);
   const [data, setData] = useState(null);
 
-  const request = async e => {
-    if (e) e.preventDefault();
+  const request = async ({ event, body: additionalBody = {} }) => {
+    if (event) event.preventDefault();
 
     setErrors([]);
     setData(null);
 
     try {
-      const { data } = await axios[method](url, body);
+      const { data } = await axios[method](url, { ...body, ...additionalBody });
 
       onSuccess(data);
 
