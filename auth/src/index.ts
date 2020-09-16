@@ -2,6 +2,7 @@ import app from './app';
 import dbConnection from './database';
 
 const start = async () => {
+  console.log('Starting up...');
   await dbConnection.create();
 };
 
