@@ -1,5 +1,0 @@
-{
-  "dependencies": {
-    "react-stripe-checkout": "^2.6.3"
-  }
-}
