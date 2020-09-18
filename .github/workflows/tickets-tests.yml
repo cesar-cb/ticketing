@@ -4,10 +4,16 @@ on:
   pull_request:
     paths:
       - "tickets/**"
+
+defaults:
+  run:
+    working-directory: tickets
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: cd tickets && docker-compose up -d && yarn && yarn test
+      - run: docker-compose up -d
+      - run: yarn && yarn test
       - run: docker-compose down
