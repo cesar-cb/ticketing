@@ -39,7 +39,7 @@ describe('Routes/update', () => {
         title: 'new title',
         price: 100,
       })
-      .expect(200);
+      .expect(201);
 
     expect(natsWrapper.client.publish).toHaveBeenCalledTimes(2);
   });
@@ -96,7 +96,7 @@ describe('Routes/update', () => {
       .expect(400);
   });
 
-  it.only('should update the ticket provided valid inputs', async () => {
+  it('should update the ticket provided valid inputs', async () => {
     const title = 'valid title';
     const price = 200;
     const userId = global.signin().payload.id;
