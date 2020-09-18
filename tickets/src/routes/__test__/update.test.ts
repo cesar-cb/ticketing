@@ -58,7 +58,7 @@ describe('Routes/update', () => {
 
   it('should return 401 if the user does not own the ticket', async () => {
     const title = 'valid title';
-    const price = 20.5;
+    const price = 200;
     const id = uuidv4();
 
     const repo = getRepository(Ticket);
@@ -96,9 +96,9 @@ describe('Routes/update', () => {
       .expect(400);
   });
 
-  it('should update the ticket provided valid inputs', async () => {
+  it.only('should update the ticket provided valid inputs', async () => {
     const title = 'valid title';
-    const price = 20.5;
+    const price = 200;
     const userId = global.signin().payload.id;
 
     const repo = getRepository(Ticket);
@@ -113,15 +113,17 @@ describe('Routes/update', () => {
       })
       .expect(201);
 
-    expect(updatedTicket.body.title).toEqual('new valid title');
-    expect(updatedTicket.body.price).toEqual(50);
+    console.log(typeof updatedTicket.body.price);
+
+    expect(updatedTicket.body.title).toBe('new valid title');
+    expect(updatedTicket.body.price).toBe(50);
 
     const ticket = await repo.findOne(updatedTicket.body.id);
 
     if (!ticket) return;
 
-    expect(ticket.title).toEqual('new valid title');
-    expect(ticket.price).toEqual(50);
+    expect(ticket.title).toBe('new valid title');
+    expect(ticket.price).toBe(50);
   });
 
   it('should be an valid uuid', async () => {

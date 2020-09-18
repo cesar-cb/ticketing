@@ -10,10 +10,10 @@ describe('Routes/show', () => {
       .get('/api/tickets/not-found-ticket')
       .send({});
 
-    expect(response.status).not.toEqual(404);
+    expect(response.status).not.toBe(404);
   });
 
-  it('should return the ticket if ticket is found', async () => {
+  fit('should return the ticket if ticket is found', async () => {
     const title = 'title';
     const price = 20;
     const userId = 'uuid';
@@ -26,9 +26,9 @@ describe('Routes/show', () => {
       .send({ title, price })
       .expect(201);
 
-    expect(response.body.title).toEqual(title);
-    expect(response.body.price).toEqual(price);
-    expect(response.body.userId).toEqual(userId);
+    expect(response.body.title).toBe(title);
+    expect(response.body.price).toBe(price);
+    expect(response.body.userId).toBe(userId);
   });
 
   it('should throw error if provid id is not an uuid', async () => {
