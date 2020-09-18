@@ -9,13 +9,13 @@ describe('Routes/new', () => {
   it('should reach /api/tickets for post requests', async () => {
     const response = await request(app).post('/api/tickets').send({});
 
-    expect(response.status).not.toEqual(404);
+    expect(response.status).not.toBe(404);
   });
 
   it('should only be accessed if the user is signed in', async () => {
     const response = await request(app).post('/api/tickets').send({});
 
-    expect(response.status).toEqual(401);
+    expect(response.status).toBe(401);
   });
 
   it('should return status other than 401 if the user is signed in', async () => {
@@ -24,7 +24,7 @@ describe('Routes/new', () => {
       .set('Cookie', global.signin().session)
       .send({});
 
-    expect(response.status).not.toEqual(401);
+    expect(response.status).not.toBe(401);
   });
 
   it('should return an error if an invalid title is provided', async () => {
@@ -67,7 +67,7 @@ describe('Routes/new', () => {
 
   it('should create a ticket with valid inputs', async () => {
     const title = 'valid title';
-    const price = 20.5;
+    const price = 200;
 
     const createdTicket = await request(app)
       .post('/api/tickets')
@@ -86,8 +86,8 @@ describe('Routes/new', () => {
 
     if (!ticket) return;
 
-    expect(ticket.title).toEqual(createdTicket.body.title);
-    expect(ticket.price).toEqual(createdTicket.body.price);
+    expect(ticket.title).toBe(createdTicket.body.title);
+    expect(ticket.price).toBe(createdTicket.body.price);
   });
 
   it('publishes an event', async () => {

@@ -8,7 +8,7 @@ import Ticket from '../../models/Ticket';
 describe('Routes/index', () => {
   it('should fetch a list of tickets', async () => {
     const title = 'valid title';
-    const price = 20.5;
+    const price = 200;
 
     const repo = getRepository(Ticket);
 

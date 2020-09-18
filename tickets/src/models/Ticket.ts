@@ -1,4 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, VersionColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  VersionColumn,
+  AfterLoad,
+} from 'typeorm';
 
 @Entity()
 export default class Ticket {
@@ -19,4 +25,8 @@ export default class Ticket {
 
   @VersionColumn()
   version: number;
+
+  @AfterLoad() convertNumerics() {
+    this.price = parseFloat(this.price as any);
+  }
 }
