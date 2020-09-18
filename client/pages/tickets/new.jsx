@@ -75,7 +75,7 @@ const NewTicket = () => {
           </Stack>
         </Box>
         <FormControl>
-          <form onSubmit={request}>
+          <form onSubmit={event => request({ event })}>
             <FormLabel htmlFor="email">Title</FormLabel>
 
             <Input

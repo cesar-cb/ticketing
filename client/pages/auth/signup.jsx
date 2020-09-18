@@ -58,7 +58,7 @@ const Signup = () => {
         </Box>
 
         <FormControl>
-          <form onSubmit={request}>
+          <form onSubmit={event => request({ event })}>
             <FormLabel htmlFor="email">Email address</FormLabel>
 
             <Input

@@ -26,7 +26,6 @@ export default class OrderCreatedListener extends Listener<OrderCreatedEvent> {
     } = data;
 
     const ticketRepo = getRepository(Ticket);
-
     const ticket = await ticketRepo.findOne(ticketId);
 
     if (!ticket) throw new NotFoundError('Ticket not found');

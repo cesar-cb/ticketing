@@ -20,8 +20,8 @@ export default class Ticket {
   @Column()
   userId: string;
 
-  @Column({ nullable: true })
-  orderId: string;
+  @Column({ type: 'uuid', nullable: true })
+  orderId?: string | null;
 
   @VersionColumn()
   version: number;

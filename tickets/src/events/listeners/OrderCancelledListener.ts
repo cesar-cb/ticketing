@@ -24,15 +24,18 @@ export default class OrderCancelledListener extends Listener<
       throw new Error('Ticket not found');
     }
 
-    await ticketRepo.save({ ...ticket, orderId: undefined });
+    const newTicket = await ticketRepo.save({
+      ...ticket,
+      orderId: null,
+    });
 
     await new TicketUpdatedPublisher(this.client).publish({
-      id: ticket.id,
-      orderId: ticket.orderId,
-      userId: ticket.userId,
-      price: ticket.price,
-      title: ticket.title,
-      version: ticket.version,
+      id: newTicket.id,
+      orderId: null,
+      userId: newTicket.userId,
+      price: newTicket.price,
+      title: newTicket.title,
+      version: newTicket.version,
     });
 
     msg.ack();

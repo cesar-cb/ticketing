@@ -6,8 +6,5 @@ export default class Payment {
   id: string;
 
   @Column()
-  userId: string;
-
-  @Column()
   stripeId: string;
 }

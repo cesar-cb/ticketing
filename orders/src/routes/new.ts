@@ -25,7 +25,7 @@ const validatorRules = [
     .withMessage('TicketId must be provided'),
 ];
 
-const EXPIRATION_WINDOW_SECONDS = 15 * 60;
+const EXPIRATION_WINDOW_SECONDS = 30;
 
 router.post(
   '/api/orders',
@@ -50,7 +50,7 @@ router.post(
     // Create Order
     const order = await orderRepo.save({
       userId: req.currentUser?.id,
-      expiresAt: expiration,
+      expiresAt: expiration.toISOString(),
       status: OrderStatus.Created,
       ticket,
     });
@@ -60,7 +60,7 @@ router.post(
       id: order.id,
       status: order.status,
       userId: order.userId,
-      expiresAt: order.expiresAt.toISOString(),
+      expiresAt: order.expiresAt,
       version: order.version,
       ticket: {
         id: ticket.id,

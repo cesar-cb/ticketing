@@ -9,7 +9,9 @@ router.get('/api/tickets/', async (req: Request, res: Response) => {
   try {
     const repo = getRepository(Ticket);
 
-    const tickets = await repo.find();
+    const tickets = await repo.find({
+      where: { orderId: null },
+    });
 
     return res.status(201).json(tickets);
   } catch (error) {
