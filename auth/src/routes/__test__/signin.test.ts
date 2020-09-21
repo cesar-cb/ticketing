@@ -9,7 +9,7 @@ describe('Route/signin', () => {
         email: 'test@email.com',
         password: 'password',
       })
-      .expect(400);
+      .expect(404);
   });
 
   it('should fail when incorrect password is supplied', async () => {
@@ -27,14 +27,14 @@ describe('Route/signin', () => {
         email: 'test@email.com',
         password: 'wrongPassword',
       })
-      .expect(400);
+      .expect(404);
   });
 
   it('should define a cookie after successful signin', async () => {
     await request(app)
       .post('/api/users/signup')
       .send({
-        email: 'test@email.com',
+        email: 'test6@email.com',
         password: 'password',
       })
       .expect(201);
@@ -42,7 +42,7 @@ describe('Route/signin', () => {
     const response = await request(app)
       .post('/api/users/signin')
       .send({
-        email: 'test@email.com',
+        email: 'test6@email.com',
         password: 'password',
       })
       .expect(201);

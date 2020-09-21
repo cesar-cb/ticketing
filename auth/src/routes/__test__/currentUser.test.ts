@@ -6,17 +6,17 @@ describe('Route/currentUser', () => {
     const cookie = await global.signup();
 
     const response = await request(app)
-      .post('/api/users/current')
+      .get('/api/users/current')
       .set('Cookie', cookie)
       .send()
       .expect(200);
 
-    expect(response.body.currentUser.email).toBe('test@test.com');
+    expect(response.body.currentUser.email).toBe('test@email.com');
   });
 
   it('should responds with null if not authenticated', async () => {
     const response = await request(app)
-      .post('/api/users/current')
+      .get('/api/users/current')
       .send()
       .expect(200);
 
