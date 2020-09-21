@@ -48,7 +48,6 @@ global.signin = () => {
 
 beforeAll(async () => {
   process.env.JWT_KEY = 'mockKey';
-  process.env.STRIPE_KEY = 'sk_test_c7MVBsHhjJ1dgOTfNQkoeabk00G1i7V3wz';
 
   await connection.create();
 });
