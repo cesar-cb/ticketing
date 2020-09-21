@@ -1,6 +1,9 @@
 name: tickets-pull-request
 
 on:
+  push:
+    branches:
+      - "master"
   pull_request:
     paths:
       - "tickets/**"

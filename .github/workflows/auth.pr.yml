@@ -1,6 +1,9 @@
 name: auth-pull-request
 
 on:
+  push:
+    branches:
+      - "master"
   pull_request:
     paths:
       - "auth/**"

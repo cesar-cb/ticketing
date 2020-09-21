@@ -1,6 +1,9 @@
 name: client-pull-request
 
 on:
+  push:
+    branches:
+      - "master"
   pull_request:
     paths:
       - "client/**"
