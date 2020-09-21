@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Box, Image, Flex, Button, Link, Text } from '@chakra-ui/core';
 import NextLink from 'next/link';
 import Router from 'next/router';
@@ -8,7 +9,9 @@ import useRequest from '../../hooks/useRequest';
 const Unlogged = () => (
   <>
     <NextLink href="/auth/signin" passHref>
-      <Link marginRight="15px">Signin</Link>
+      <Button as="a" marginRight="15px">
+        Signin
+      </Button>
     </NextLink>
     <NextLink href="/auth/signup" passHref>
       <Button variantColor="teal" as="a">
@@ -53,5 +56,10 @@ const Header = ({ currentUser }) => {
     </Box>
   );
 };
+
+Logged.propTypes = {
+  email: PropTypes.string.isRequired,
+  signout: PropTypes.func.isRequired,
+}
 
 export default Header;
