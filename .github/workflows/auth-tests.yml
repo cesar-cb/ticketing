@@ -4,6 +4,11 @@ on:
   pull_request:
     paths:
       - "auth/**"
+
+defaults:
+  run:
+    working-directory: client
+
 jobs:
   build:
     runs-on: ubuntu-latest
