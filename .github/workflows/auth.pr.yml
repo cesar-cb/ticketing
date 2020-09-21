@@ -7,7 +7,7 @@ on:
 
 defaults:
   run:
-    working-directory: client
+    working-directory: auth
 
 jobs:
   build:
