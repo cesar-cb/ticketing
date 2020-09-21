@@ -1,10 +1,14 @@
-import { createConnection, getConnection } from 'typeorm';
+import { createConnection, getConnection, getConnectionOptions } from 'typeorm';
 
 const connection = {
   async create() {
-    console.log('Connected to Orders DB');
+    const optionName = process.env.NODE_ENV === 'test' ? 'test' : 'default';
 
-    return createConnection();
+    const options = await getConnectionOptions(optionName);
+
+    console.log('Connected to Payments DB');
+
+    return createConnection({ ...options, name: 'default' });
   },
 
   async close() {

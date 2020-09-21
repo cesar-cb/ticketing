@@ -1,107 +1,103 @@
 import request from 'supertest';
 import { getRepository } from 'typeorm';
+import { v4 as uuidv4 } from 'uuid';
+import { OrderStatus } from '@ticketingcb/common';
 
 import app from '../../app';
-import Ticket from '../../models/Ticket';
-import natsWrapper from '../../nats-wrapper';
+
+import Order from '../../models/Order';
+import Payment from '../../models/Payment';
+
+const fakeStripeId = 'fake stripe id';
+
+jest.mock('stripe', () => {
+  return jest.fn().mockImplementation(() => {
+    return {
+      charges: {
+        create: () => ({ id: fakeStripeId }),
+      },
+    };
+  });
+});
 
 describe('Routes/new', () => {
-  it('should reach /api/tickets for post requests', async () => {
-    const response = await request(app).post('/api/tickets').send({});
-
-    expect(response.status).not.toEqual(404);
-  });
-
-  it('should only be accessed if the user is signed in', async () => {
-    const response = await request(app).post('/api/tickets').send({});
-
-    expect(response.status).toEqual(401);
-  });
-
-  it('should return status other than 401 if the user is signed in', async () => {
-    const response = await request(app)
-      .post('/api/tickets')
-      .set('Cookie', global.signin().session)
-      .send({});
-
-    expect(response.status).not.toEqual(401);
-  });
-
-  it('should return an error if an invalid title is provided', async () => {
+  it('returns a 404 when purchasing an order that does not exist', async () => {
     await request(app)
-      .post('/api/tickets')
+      .post('/api/payments')
       .set('Cookie', global.signin().session)
       .send({
-        title: '',
-        price: 10,
+        token: 'asldkfj',
+        orderId: uuidv4(),
       })
-      .expect(400);
-
-    await request(app)
-      .post('/api/tickets')
-      .set('Cookie', global.signin().session)
-      .send({
-        price: 10,
-      })
-      .expect(400);
+      .expect(404);
   });
 
-  it('should return an error if an invalid price is provided', async () => {
-    await request(app)
-      .post('/api/tickets')
-      .set('Cookie', global.signin().session)
-      .send({
-        title: 'valid title',
-        price: '',
-      })
-      .expect(400);
+  it('returns a 401 when purchasing an order that doesnt belong to the user', async () => {
+    const order = await getRepository(Order).save({
+      id: uuidv4(),
+      userId: uuidv4(),
+      version: 0,
+      price: 20,
+      status: OrderStatus.Created,
+    });
 
     await request(app)
-      .post('/api/tickets')
+      .post('/api/payments')
       .set('Cookie', global.signin().session)
       .send({
-        title: 'valid title',
+        token: 'asldkfj',
+        orderId: order.id,
+      })
+      .expect(401);
+  });
+
+  it('returns a 400 when purchasing a cancelled order', async () => {
+    const userId = uuidv4();
+    const order = await getRepository(Order).save({
+      id: uuidv4(),
+      userId,
+      version: 0,
+      price: 20,
+      status: OrderStatus.Cancelled,
+    });
+
+    await request(app)
+      .post('/api/payments')
+      .set('Cookie', global.signin(userId).session)
+      .send({
+        orderId: order.id,
+        token: 'asdlkfj',
       })
       .expect(400);
   });
 
-  it('should create a ticket with valid inputs', async () => {
-    const title = 'valid title';
-    const price = 20.5;
+  it('returns a 201 with valid inputs', async () => {
+    const userId = uuidv4();
+    const price = 200;
+    const order = await getRepository(Order).save({
+      id: uuidv4(),
+      userId,
+      version: 0,
+      price,
+      status: OrderStatus.Created,
+    });
 
-    const createdTicket = await request(app)
-      .post('/api/tickets')
-      .set('Cookie', global.signin().session)
+    await request(app)
+      .post('/api/payments')
+      .set('Cookie', global.signin(userId).session)
       .send({
-        title,
-        price,
+        token: 'tok_visa',
+        orderId: order.id,
       })
       .expect(201);
 
-    const { id } = createdTicket.body;
+    const payment = await getRepository(Payment).findOne({
+      where: {
+        orderId: order.id,
+        stripeId: fakeStripeId,
+      },
+    });
 
-    const repo = getRepository(Ticket);
-
-    const ticket = await repo.findOne(id);
-
-    if (!ticket) return;
-
-    expect(ticket.title).toEqual(createdTicket.body.title);
-    expect(ticket.price).toEqual(createdTicket.body.price);
-  });
-
-  it('publishes an event', async () => {
-    const title = 'asldkfj';
-
-    await request(app)
-      .post('/api/tickets')
-      .set('Cookie', global.signin().session)
-      .send({
-        title,
-        price: 20,
-      })
-      .expect(201);
-
-    expect(natsWrapper.client.publish).toHaveBeenCalled();
+    expect(payment).not.toBeNull();
   });
 });

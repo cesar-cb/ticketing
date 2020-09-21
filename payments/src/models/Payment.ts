@@ -6,5 +6,8 @@ export default class Payment {
   id: string;
 
   @Column()
+  orderId: string;
+
+  @Column()
   stripeId: string;
 }
