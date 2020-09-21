@@ -1,0 +1,19 @@
+name: auth-pull-request
+
+on:
+  pull_request:
+    paths:
+      - "auth/**"
+
+defaults:
+  run:
+    working-directory: auth
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: docker-compose up -d
+      - run: yarn && yarn lint && yarn test
+      - run: docker-compose down

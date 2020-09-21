@@ -1,10 +1,14 @@
-import { createConnection, getConnection } from 'typeorm';
+import { createConnection, getConnection, getConnectionOptions } from 'typeorm';
 
 const connection = {
   async create() {
+    const optionName = process.env.NODE_ENV === 'test' ? 'test' : 'default';
+
+    const options = await getConnectionOptions(optionName);
+
     console.log('Connected to Auth DB');
 
-    return createConnection();
+    return createConnection({ ...options, name: 'default' });
   },
 
   async close() {

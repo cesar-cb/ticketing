@@ -1,13 +1,13 @@
-name: tests-tickets
+name: orders-pull-request
 
 on:
   pull_request:
     paths:
-      - "tickets/**"
+      - "orders/**"
 
 defaults:
   run:
-    working-directory: tickets
+    working-directory: orders
 
 jobs:
   build:
@@ -15,5 +15,5 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: docker-compose up -d
-      - run: yarn && yarn test
+      - run: yarn && yarn lint && yarn test
       - run: docker-compose down

@@ -52,7 +52,10 @@ const OrderShow = ({ order, currentUser }) => {
           </Stack>
         </Box>
       )}
-      <h1>Left: {timeLeft}</h1>
+      <h1>
+        Left:
+        {timeLeft}
+      </h1>
       <StripeCheckout
         token={({ id: token }) => request({ body: { token } })}
         stripeKey="pk_test_yEvWo8W9yBhRo6HjtdM2oQAs"

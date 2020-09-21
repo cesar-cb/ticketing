@@ -45,7 +45,7 @@ router.patch(
       },
     });
 
-    return res.status(200).json(newOrder);
+    return res.status(204).json(newOrder);
   },
 );
 

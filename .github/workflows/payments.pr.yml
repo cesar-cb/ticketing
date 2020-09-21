@@ -1,0 +1,19 @@
+name: payments-pull-request
+
+on:
+  pull_request:
+    paths:
+      - "payments/**"
+
+defaults:
+  run:
+    working-directory: payments
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: docker-compose up -d
+      - run: yarn && yarn lint && yarn test
+      - run: docker-compose down
