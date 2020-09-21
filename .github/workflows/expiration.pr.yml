@@ -1,4 +1,4 @@
-name: expiration-tests
+name: expiration-pull-request
 
 on:
   pull_request:
