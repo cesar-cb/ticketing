@@ -5,7 +5,7 @@ import OrderCreatedListener from './events/listeners/OrderCreatedListener';
 import OrderCancelledListener from './events/listeners/OrderCancelledListener';
 
 const start = async () => {
-  console.log('test');
+  console.log('dev');
 
   try {
     const natsUrl = process.env.NATS_URL;

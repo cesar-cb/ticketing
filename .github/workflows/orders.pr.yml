@@ -1,6 +1,9 @@
 name: orders-pull-request
 
 on:
+  push:
+    branches:
+      - "master"
   pull_request:
     paths:
       - "orders/**"
