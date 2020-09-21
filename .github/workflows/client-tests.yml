@@ -1,13 +1,13 @@
-name: tickets-tests
+name: client-tests
 
 on:
   pull_request:
     paths:
-      - "tickets/**"
+      - "client/**"
 
 defaults:
   run:
-    working-directory: tickets
+    working-directory: client
 
 jobs:
   build:

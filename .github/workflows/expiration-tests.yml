@@ -1,13 +1,13 @@
-name: tickets-tests
+name: expiration-tests
 
 on:
   pull_request:
     paths:
-      - "tickets/**"
+      - "expiration/**"
 
 defaults:
   run:
-    working-directory: tickets
+    working-directory: expiration
 
 jobs:
   build:
