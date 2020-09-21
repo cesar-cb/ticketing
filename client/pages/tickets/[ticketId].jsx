@@ -31,7 +31,10 @@ const TicketShow = ({ ticket }) => {
         </Box>
       )}
       <Text fontSize="4xl">{ticket.title}</Text>
-      <Text fontSize="2xl">Price: {ticket.price}</Text>
+      <Text fontSize="2xl">
+        Price:
+        {ticket.price}
+      </Text>
       <Button onClick={request} bg="green.300">
         Purchase
       </Button>

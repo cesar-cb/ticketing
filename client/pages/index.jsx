@@ -40,7 +40,7 @@ const Home = ({ currentUser, tickets }) => {
               {ticket.title}
             </Box>
 
-            <Box>$ {ticket.price}</Box>
+            <Box>${ticket.price}</Box>
           </Box>
         </NextLink>
       ))}
