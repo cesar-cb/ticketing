@@ -482,10 +482,10 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@ticketingcb/common@^1.0.13":
-  version "1.0.13"
-  resolved "https://registry.yarnpkg.com/@ticketingcb/common/-/common-1.0.13.tgz#f48df1a3356a3e3d0bd23105bbba86f51b54d67b"
-  integrity sha512-vbXlAYiYyTvPh60eJux4qgTnW/4HzwiQXuNXVhT+vauk78FpK+PwLnFRASttLxFMyNE33TDgnJ+KvxbjUl97Jg==
+"@ticketingcb/common@^1.0.16":
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/@ticketingcb/common/-/common-1.0.16.tgz#b73a4020c63acb8f5a934ae858028edc315e0956"
+  integrity sha512-QxQt6WYjPpo8La0SWkwK+qeuRng0KnHrOkS1bpsr2ydXHczWOk4cejY1lbqtqp3KUslduwj4+bM6jZp3ilC8Aw==
   dependencies:
     "@types/cookie-session" "^2.0.41"
     "@types/express" "^4.17.7"
@@ -742,13 +742,6 @@
   version "0.0.30"
   resolved "https://registry.yarnpkg.com/@types/strip-json-comments/-/strip-json-comments-0.0.30.tgz#9aa30c04db212a9a0649d6ae6fd50accc40748a1"
   integrity sha512-7NQmHra/JILCd1QqpSzl8+mJRc8ZHz3uDm8YV1Ks9IhK0epEiTw8aIErbvH9PI+6XbqhyIQy3462nEsn7UVzjQ==
-
-"@types/stripe@^7.13.24":
-  version "7.13.24"
-  resolved "https://registry.yarnpkg.com/@types/stripe/-/stripe-7.13.24.tgz#a82416d949bad90bc283db399958fa0c3cbe41a3"
-  integrity sha512-jlY9nvZMHSikta0udPubW5HcIl3C9waWPHqAi2oCL9dn91rwJLfKp/A9b7Trif+YTOv0StACk1gGLyBSgXQNmA==
-  dependencies:
-    "@types/node" "*"
 
 "@types/superagent@*":
   version "4.1.9"
@@ -5556,10 +5549,10 @@ strip-json-comments@^3.1.0:
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-3.1.1.tgz#31f1281b3832630434831c310c01cccda8cbe006"
   integrity sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==
 
-stripe@^8.89.0:
-  version "8.89.0"
-  resolved "https://registry.yarnpkg.com/stripe/-/stripe-8.89.0.tgz#fcd48ba7e298d547c89b686dea155f0507c25e67"
-  integrity sha512-XiAuNAyv2ORCWZrIaG22frr7rXP1J5+XsHA4QUBwB0fePB5kxV0O6FFMrZ8nipYZ43pnez5EIJ/Oxb1jLq6w6g==
+stripe@^8.97.0:
+  version "8.97.0"
+  resolved "https://registry.yarnpkg.com/stripe/-/stripe-8.97.0.tgz#61b17d14f01400890e5dfa6a2affc4aa97a08982"
+  integrity sha512-BMcwidED1qB8oWfrGFMoNG5RAXQyaopxOUmw1eo8CpdLihG0+6Dl+ReCAhemJ6a55Mqmirrmks9HIDkgtZKvSA==
   dependencies:
     "@types/node" ">=8.1.0"
     qs "^6.6.0"

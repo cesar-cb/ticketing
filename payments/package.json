@@ -19,7 +19,7 @@
     ]
   },
   "dependencies": {
-    "@ticketingcb/common": "^1.0.13",
+    "@ticketingcb/common": "^1.0.16",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "cookie-session": "^1.4.0",
@@ -32,7 +32,7 @@
     "node-nats-streaming": "^0.3.2",
     "pg": "^8.3.0",
     "reflect-metadata": "^0.1.13",
-    "stripe": "^8.89.0",
+    "stripe": "^8.97.0",
     "supertest": "^4.0.2",
     "ts-mongoose": "^0.0.21",
     "ts-node-dev": "^1.0.0-pre.51",
@@ -49,7 +49,6 @@
     "@types/mongoose": "^5.7.32",
     "@types/morgan": "^1.9.1",
     "@types/node": "^14.0.27",
-    "@types/stripe": "^7.13.24",
     "@types/supertest": "^2.0.10",
     "@types/uuid": "^8.0.1",
     "@typescript-eslint/eslint-plugin": "^3.7.0",
