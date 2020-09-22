@@ -1,19 +1,20 @@
+import PropTypes from 'prop-types';
 import { ThemeProvider, CSSReset, theme, DarkMode, Box } from '@chakra-ui/core';
 import Header from '../components/Header';
 import request from '../api/request';
 
-const config = theme => ({
+const config = themeConfig => ({
   light: {
-    color: theme.colors.gray[700],
-    bg: theme.colors.gray[50],
-    borderColor: theme.colors.gray[200],
-    placeholderColor: theme.colors.gray[500],
+    color: themeConfig.colors.gray[700],
+    bg: themeConfig.colors.gray[50],
+    borderColor: themeConfig.colors.gray[200],
+    placeholderColor: themeConfig.colors.gray[500],
   },
   dark: {
-    color: theme.colors.whiteAlpha[900],
-    bg: theme.colors.gray[800],
-    borderColor: theme.colors.whiteAlpha[300],
-    placeholderColor: theme.colors.whiteAlpha[400],
+    color: themeConfig.colors.whiteAlpha[900],
+    bg: themeConfig.colors.gray[800],
+    borderColor: themeConfig.colors.whiteAlpha[300],
+    placeholderColor: themeConfig.colors.whiteAlpha[400],
   },
 });
 
@@ -24,11 +25,26 @@ const App = ({ Component, pageProps, currentUser }) => {
         <DarkMode>
           <CSSReset config={config} />
           <Header currentUser={currentUser} />
+          {/* eslint-disable-next-line react/jsx-props-no-spreading */}
           <Component currentUser={currentUser} {...pageProps} />
         </DarkMode>
       </Box>
     </ThemeProvider>
   );
+};
+
+App.propTypes = {
+  Component: PropTypes.elementType.isRequired,
+  pageProps: PropTypes.shape({}).isRequired,
+  currentUser: PropTypes.shape({
+    email: PropTypes.string.isRequired,
+    iat: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
+  }),
+};
+
+App.defaultProps = {
+  currentUser: {},
 };
 
 App.getInitialProps = async appContext => {

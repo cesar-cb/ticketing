@@ -1,10 +1,9 @@
-import { Heading, Box, Link } from '@chakra-ui/core';
+import PropTypes from 'prop-types';
+import { Box } from '@chakra-ui/core';
 import Head from 'next/head';
 import NextLink from 'next/link';
 
-const Home = ({ currentUser, tickets }) => {
-  console.log(tickets);
-
+const Home = ({ tickets }) => {
   return (
     <>
       <Head>
@@ -40,7 +39,10 @@ const Home = ({ currentUser, tickets }) => {
               {ticket.title}
             </Box>
 
-            <Box>${ticket.price}</Box>
+            <Box>
+              <span>$ </span>
+              {ticket.price}
+            </Box>
           </Box>
         </NextLink>
       ))}
@@ -48,7 +50,24 @@ const Home = ({ currentUser, tickets }) => {
   );
 };
 
-Home.getInitialProps = async (context, client, currentUser) => {
+Home.propTypes = {
+  tickets: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      orderId: PropTypes.string,
+      price: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      userId: PropTypes.string.isRequired,
+      version: PropTypes.number.isRequired,
+    }).isRequired,
+  ),
+};
+
+Home.defaultProps = {
+  tickets: [],
+};
+
+Home.getInitialProps = async (_, client) => {
   const { data } = await client.get('/api/tickets');
 
   return { tickets: data };

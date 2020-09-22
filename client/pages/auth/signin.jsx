@@ -26,7 +26,7 @@ const Signin = () => {
   const [password, setPassword] = useState('');
   const router = useRouter();
 
-  const { request, data, errors } = useRequest({
+  const { request, errors } = useRequest({
     method: 'post',
     url: '/api/users/signin',
     body: { email, password },
@@ -94,7 +94,7 @@ const Signin = () => {
             </Button>
 
             <Text mt="15px" textAlign="center">
-              No account ?{' '}
+              No account ?
               <NextLink href="/auth/signup" passHref>
                 <Link color="teal.100">Create one</Link>
               </NextLink>

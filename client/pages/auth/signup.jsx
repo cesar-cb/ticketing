@@ -24,7 +24,7 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const router = useRouter();
 
-  const { request, data, errors } = useRequest({
+  const { request, errors } = useRequest({
     method: 'post',
     url: '/api/users/signup',
     body: { email, password },
@@ -71,7 +71,7 @@ const Signup = () => {
             />
 
             <FormHelperText id="email-helper-text">
-              We'll never share your email.
+              We will never share your email.
             </FormHelperText>
 
             <FormLabel htmlFor="password" marginTop="20px">

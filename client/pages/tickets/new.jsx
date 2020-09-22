@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import NextLink from 'next/link';
 import Head from 'next/head';
 import {
   Alert,
@@ -12,9 +11,7 @@ import {
   FormLabel,
   Heading,
   Input,
-  Link,
   Stack,
-  Text,
 } from '@chakra-ui/core';
 import IntlCurrencyInput from 'react-intl-currency-input';
 
@@ -25,7 +22,7 @@ const NewTicket = () => {
   const [price, setPrice] = useState('');
   const router = useRouter();
 
-  const { request, data, errors } = useRequest({
+  const { request, errors } = useRequest({
     method: 'post',
     url: '/api/tickets',
     body: { title, price },
@@ -34,20 +31,6 @@ const NewTicket = () => {
       router.push('/');
     },
   });
-
-  const currencyConfig = {
-    locale: 'pt-BR',
-    formats: {
-      number: {
-        BRL: {
-          style: 'currency',
-          currency: 'BRL',
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        },
-      },
-    },
-  };
 
   return (
     <Flex justifyContent="center" alignItems="center">

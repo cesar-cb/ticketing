@@ -17,11 +17,14 @@ const useRequest = ({
     setData(null);
 
     try {
-      const { data } = await axios[method](url, { ...body, ...additionalBody });
+      const { data: response } = await axios[method](url, {
+        ...body,
+        ...additionalBody,
+      });
 
-      onSuccess(data);
+      onSuccess(response);
 
-      setData(data);
+      setData(response);
     } catch (err) {
       setErrors(err.response.data.errors);
     }

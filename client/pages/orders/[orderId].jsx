@@ -1,11 +1,14 @@
+import PropTypes from 'prop-types';
 import { Alert, AlertIcon, Box, Stack } from '@chakra-ui/core';
 import { useEffect, useState } from 'react';
-
+import { useRouter } from 'next/router';
 import StripeCheckout from 'react-stripe-checkout';
 
 import useRequest from '../../hooks/useRequest';
 
 const OrderShow = ({ order, currentUser }) => {
+  const router = useRouter();
+
   const [timeLeft, setTimeLeft] = useState(0);
   const { request, errors } = useRequest({
     url: '/api/payments',
@@ -13,7 +16,7 @@ const OrderShow = ({ order, currentUser }) => {
     body: {
       orderId: order.id,
     },
-    onSuccess: payment => console.log(payment),
+    onSuccess: () => router.push('/orders'),
   });
 
   useEffect(() => {
@@ -64,6 +67,27 @@ const OrderShow = ({ order, currentUser }) => {
       />
     </>
   );
+};
+
+OrderShow.propTypes = {
+  order: PropTypes.shape({
+    expiresAt: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    ticket: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      price: PropTypes.string.isRequired,
+      orderId: PropTypes.string,
+      version: PropTypes.number.isRequired,
+    }).isRequired,
+    userId: PropTypes.string.isRequired,
+    version: PropTypes.number.isRequired,
+  }).isRequired,
+  currentUser: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 OrderShow.getInitialProps = async (context, client) => {
