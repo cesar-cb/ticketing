@@ -16,7 +16,7 @@
 7. Access [ticketing.dev](http://ticketing.dev)
 8. Bypass Chrome https security by type `thisisunsafe` or use another browser
 
-##### How To Run Tests
+##### How To Run Tests:
 1. `docker-compose up -d` (in order to create a local database image)
 2. `yarn test`
 
