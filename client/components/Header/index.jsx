@@ -12,15 +12,19 @@ const Unlogged = () => (
       <Link mr="15px">Signin</Link>
     </NextLink>
     <NextLink href="/auth/signup" passHref>
-      <Button variantColor="teal" as="a">
-        Signup
-      </Button>
+      <Button variantColor="teal">Signup</Button>
     </NextLink>
   </>
 );
 
 const Logged = ({ email, signout }) => (
   <>
+    <NextLink href="/tickets/new" passHref>
+      <Link>New Ticket</Link>
+    </NextLink>
+    <NextLink href="/orders" passHref>
+      <Link>My Orders</Link>
+    </NextLink>
     <Text fontSize="md" as="b" marginRight="15px">
       {email}
     </Text>
