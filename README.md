@@ -18,6 +18,15 @@
 
 #### Linux: WIP, but you can try to run it with [minikube](https://kubernetes.io/docs/setup/learning-environment/minikube/)
 
+## Technologies available on this project:
+1. Kubernetes
+2. Message driven architecture (with [NATS](https://nats.io/))
+3. Skaffold, wich allow us to run the project in dev mode
+4. Typeorm as ORM, using Postgres as primary database
+5. NextJs provinding a **good** SSR and project template
+6. [Chakra UI](https://chakra-ui.com/) an awesome design system that provides a bunch of accessibility features
+7. others...
+
 ## TL;DR
 Unfotunately, we have different ways to run the project at Mac and Linux environments, for now, I'm prioritizing Mac.
 
@@ -37,7 +46,7 @@ The project as a whole needs some amount of improvement, I've listed some of the
 - [ ] Revisit Error Handler
 - [ ] Monorepo patterns
 - [ ] Layout
-- [ ] Template (g8?)
+- [ ] Template ([g8?](https://github.com/foundweekends/giter8))
 - [ ] add errors message to a constant
 - [ ] create d.ts files
 - [ ] use Helm
