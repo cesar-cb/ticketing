@@ -36,13 +36,16 @@ export default class ExpirationCompleteEventListener extends Listener<
 
     if (order.status === OrderStatus.Complete) return msg.ack();
 
-    await orderRepo.save({ ...order, status: OrderStatus.Cancelled });
+    const newOrder = await orderRepo.save({
+      ...order,
+      status: OrderStatus.Cancelled,
+    });
 
     new OrderCancelledPublisher(this.client).publish({
-      id: order.id,
-      version: order.version,
+      id: newOrder.id,
+      version: newOrder.version,
       ticket: {
-        id: order.ticket.id,
+        id: newOrder.ticket.id,
       },
     });
 

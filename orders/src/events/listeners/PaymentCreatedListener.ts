@@ -27,7 +27,7 @@ export default class PaymentCreatedEventListener extends Listener<
     const orderRepo = getRepository(Order);
 
     const order = await orderRepo.findOne({
-      where: { orderId },
+      where: { id: orderId },
       relations: ['ticket'],
     });
 
