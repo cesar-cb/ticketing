@@ -2,6 +2,8 @@
 
 > ## :warning: ATTENTION: This project is under development and bugs can be found
 
+
+
 ## How to Run:
 
 #### MAC:
@@ -19,13 +21,18 @@
 ## TL;DR
 Unfotunately, we have different ways to run the project at Mac and Linux environments, for now, I'm prioritizing Mac.
 
+Business rules need to be improved (you can buy your own ticket), user should edit a ticket, user should upload a ticket, edit profile. But I'm focused primarily on development
+
 This project is focused on Backend development, front end stack needs a huge improvement, such as: better file separation unit test, integrations tests, Typescript, prop types organization, an in house design system library, microfrontend concepts
 
+It would take a long time for me to improve this project and I am considering that it is not worth the effort, the main goal here was develop my backend and DevOps skills. I still need to find a free kubernetes cluster in order to deploy this application
 
 The project as a whole needs some amount of improvement, I've listed some of them in the todo list bellow
 
 ## TODO:
 
+- [ ] create unit tests for remaining files
+- [ ] E2E between services
 - [ ] Revisit auth strategy
 - [ ] Revisit Error Handler
 - [ ] Monorepo patterns
