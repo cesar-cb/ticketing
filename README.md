@@ -2,7 +2,7 @@
 
 > ## :warning: ATTENTION: This project is under development and bugs can be found
 
-
+![Ticketing](https://github.com/cesar-cb/ticketing/raw/master/ticketing.gif)
 
 ## How to Run:
 
