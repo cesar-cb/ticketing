@@ -20,10 +20,10 @@ const Unlogged = () => (
 const Logged = ({ email, signout }) => (
   <>
     <NextLink href="/tickets/new" passHref>
-      <Link>New Ticket</Link>
+      <Link marginRight="15px">New Ticket</Link>
     </NextLink>
     <NextLink href="/orders" passHref>
-      <Link>My Orders</Link>
+      <Link marginRight="15px">My Orders</Link>
     </NextLink>
     <Text fontSize="md" as="b" marginRight="15px">
       {email}

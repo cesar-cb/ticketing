@@ -1,19 +1,23 @@
 import PropTypes from 'prop-types';
-import { List, ListItem } from '@chakra-ui/core';
+import { List, ListItem, Text } from '@chakra-ui/core';
 
 const OrderIndex = ({ orders }) => {
   return (
-    <List styleType="disc">
-      {orders.map(order => {
-        return (
-          <ListItem key={order.id}>
-            {order.ticket.title}
-            <span>-</span>
-            {order.status}
-          </ListItem>
-        );
-      })}
-    </List>
+    <>
+      <Text fontSize="4xl">My Orders:</Text>
+
+      <List styleType="disc">
+        {orders.map(order => {
+          return (
+            <ListItem key={order.id}>
+              {order.ticket.title}
+              <span>-</span>
+              <b>{order.status}</b>
+            </ListItem>
+          );
+        })}
+      </List>
+    </>
   );
 };
 
