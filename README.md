@@ -16,7 +16,11 @@
 7. Access [ticketing.dev](http://ticketing.dev)
 8. Bypass Chrome https security by type `thisisunsafe` or use another browser
 
-#### Linux: WIP, but you can try to run it with [minikube](https://kubernetes.io/docs/setup/learning-environment/minikube/)
+#### How To Run Tests
+1. `docker-compose up -d` (in order to create a local database image)
+2. `yarn test`
+
+### Linux: WIP, but you can try to run it with [minikube](https://kubernetes.io/docs/setup/learning-environment/minikube/)
 
 ## Technologies available on this project:
 1. Kubernetes
