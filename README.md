@@ -4,7 +4,7 @@
 
 ## How to Run:
 
-### MAC:
+#### MAC:
 1. Install [`Kubectl`](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 2. Install [`Docker`](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
 3. Install [`Skaffold`](https://skaffold.dev/docs/install/)
@@ -14,9 +14,9 @@
 7. Access [ticketing.dev](http://ticketing.dev)
 8. Bypass Chrome https security by type `thisisunsafe` or use another browser
 
-### Linux: WIP, but you can try to run it with [minikube](https://kubernetes.io/docs/setup/learning-environment/minikube/)
+#### Linux: WIP, but you can try to run it with [minikube](https://kubernetes.io/docs/setup/learning-environment/minikube/)
 
-### TL;DR
+## TL;DR
 Unfotunately, we have different ways to run the project at Mac and Linux environments, for now, I'm prioritizing Mac.
 
 This project is focused on Backend development, front end stack needs a huge improvement, such as: better file separation unit test, integrations tests, Typescript, prop types organization, an in house design system library, microfrontend concepts
@@ -24,7 +24,7 @@ This project is focused on Backend development, front end stack needs a huge imp
 
 The project as a whole needs some amount of improvement, I've listed some of them in the todo list bellow
 
-### TODO:
+## TODO:
 
 - [ ] Revisit auth strategy
 - [ ] Revisit Error Handler
