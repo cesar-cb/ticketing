@@ -24,8 +24,9 @@
 3. Skaffold, wich allow us to run the project in dev mode
 4. Typeorm as ORM, using Postgres as primary database
 5. NextJs provinding a **good** SSR and project template
-6. [Chakra UI](https://chakra-ui.com/) an awesome design system that provides a bunch of accessibility features
-7. others...
+6. [Chakra UI :heart:](https://chakra-ui.com/) an awesome design system that provides a bunch of accessibility features
+7. Typescript on backend  🙌
+8. others...
 
 ## TL;DR
 Unfotunately, we have different ways to run the project at Mac and Linux environments, for now, I'm prioritizing Mac.
