@@ -1,4 +1,4 @@
-name: orders-pull-request
+name: payments
 
 on:
   push:
@@ -6,11 +6,11 @@ on:
       - "master"
   pull_request:
     paths:
-      - "orders/**"
+      - "payments/**"
 
 defaults:
   run:
-    working-directory: orders
+    working-directory: payments
 
 jobs:
   build:

@@ -1,4 +1,4 @@
-name: client-pull-request
+name: client
 
 on:
   push:

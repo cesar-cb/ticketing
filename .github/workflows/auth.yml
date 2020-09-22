@@ -1,4 +1,4 @@
-name: payments-pull-request
+name: auth
 
 on:
   push:
@@ -6,11 +6,11 @@ on:
       - "master"
   pull_request:
     paths:
-      - "payments/**"
+      - "auth/**"
 
 defaults:
   run:
-    working-directory: payments
+    working-directory: auth
 
 jobs:
   build:

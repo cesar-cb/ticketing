@@ -1,4 +1,4 @@
-name: tickets-pull-request
+name: tickets
 
 on:
   push:

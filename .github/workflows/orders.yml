@@ -1,4 +1,4 @@
-name: auth-pull-request
+name: orders
 
 on:
   push:
@@ -6,11 +6,11 @@ on:
       - "master"
   pull_request:
     paths:
-      - "auth/**"
+      - "orders/**"
 
 defaults:
   run:
-    working-directory: auth
+    working-directory: orders
 
 jobs:
   build:
