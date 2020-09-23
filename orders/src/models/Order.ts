@@ -2,8 +2,6 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  OneToOne,
-  JoinColumn,
   VersionColumn,
   ManyToOne,
 } from 'typeorm';
@@ -34,8 +32,4 @@ export default class Order {
 
   @ManyToOne(type => Ticket)
   ticket: Ticket;
-
-  // @OneToOne(() => Ticket)
-  // @JoinColumn()
-  // ticket: Ticket;
 }
